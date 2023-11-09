@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "e43d903b-c717-46c9-a519-e2555f859bd9",
+		"name": "Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28467416"
+	},
+	"item": [
+		{
+			"name": "API_1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://api.publicapis.org/entries"
+			},
+			"response": []
+		},
+		{
+			"name": "API_2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://api.coindesk.com/v1/bpi/currentprice.json"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Codigo de estado es 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"",
+					"pm.test(\"Tiempo de respuesta es menor de 100ms\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+					"});"
+				]
+			}
+		}
+	]
+}
