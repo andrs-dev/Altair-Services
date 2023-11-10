@@ -1,0 +1,20 @@
+:root {
+    --success-icon-color: #FFFFFF;
+    --warning-icon-color: #6a1a21;
+}
+
+.check-circle-icon {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 50px;
+    height: 50px;
+}
+
+.warning-circle-color {
+    background-image: url("../assets/icons/exclamation-circle-fill.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    fill: var(--warning-icon-color);
+}

@@ -14,50 +14,62 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/icons.css">
     </head>
     <body>
+
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
-                <a class="btn btn-primary" href="#signup">Sign Up</a>
+                <a class="navbar-brand" href="#!">
+                    <img src="./assets/img/logo_smart_financial.png" alt="Logo de Smart Financial" height="60px">
+                </a>
+                <a class="nav-link" href="https://github.com/PinkyBooDev/Altair-Services" target="_blank"
+                   title="Github Repository">Version 1.0</a>
             </div>
         </nav>
+
         <!-- Masthead-->
         <header class="masthead">
             <div class="container position-relative">
                 <div class="row justify-content-center">
                     <div class="col-xl-6">
                         <div class="text-center text-white">
-                            <h1 class="mb-5">Services</h1>
+                            <h1 class="mb-5">Servicios de Altair</h1>
+                            <button href="#" class="btn btn-secondary">Probar Ahora</button>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
+
         <!-- Icons Grid-->
-        <section class="features-icons bg-light text-center">
+        <section class="bg-light">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
-                            <h3>Fully Responsive</h3>
-                            <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
+                    <div class="card border-success my-5 p-0 m-0" style="max-width: 100%;">
+                        <div class="card-header text-bg-success d-flex flex-row align-content-center">
+                            <span>
+                                <img style="margin: 0 20px 0 10px;" class="check-circle-icon text-white h-100"
+                                      src="./assets/icons/check-circle-fill.svg"
+                                     alt="">
+                            </span>
+                            <div class="d-flex flex-row justify-content-between w-100">
+                                <div>
+                                    <h2 class="m-0 p-0">Ultima Actualización:</h2>
+                                    <h3 class="m0 p-0" id="date-latest-test"> Data</h3>
+                                </div>
+                                <div>
+                                    <h2 class="card-text">Funcionando</h2>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
-                            <h3>Bootstrap 5 Ready</h3>
-                            <p class="lead mb-0">Featuring the latest build of the new Bootstrap 5 framework!</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
-                            <h3>Easy to Use</h3>
-                            <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
+                        <div class="card-body text-success">
+                            <div class="flex-column">
+                                <p class="card-text lead mt-3">Filename.html</p>
+                                <p class="card-text lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ex
+                                    amet vulputate lobortis nam lorem nobis consequat pariatur facilisi. Nostrud quod eiusmod enim laboris elitr. Iriure molestie cupiditat pariatur. Sanctus accusam laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ex amet vulputate lobortis nam lorem nobis consequat pariatur facilisi.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -198,11 +210,6 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script src="js/GenerateReport.js"></script>
     </body>
 </html>

@@ -1,11 +1,22 @@
 #!/bin/bash
+# author: Andres (andreshm0608@gmail.com)
+# Script para guardar el reporte del estado de los servicios
 
-# Obtener el directorio del script
-SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
-export TZ=UTC
+# Timezone
+export TZ=America/Bogota
 
 MONTH=$(date +"%b" | tr '[:lower:]' '[:upper:]')
 DAY=$(date +"%d")
 TIME=$(date +"%H%M")
 
-newman run "$SCRIPT_DIR/../Test.postman_collection.json" -r htmlextra --reporter-htmlextra-export "$TIME-CollectionName-Test-$DAY-$MONTH.html"
+# Guarda la ruta del directorio padre (ruta relativa)
+API_DIR=$(dirname "$(dirname "$(readlink -f "$0")")")
+
+# Nomenclatura de los archivos de los reportes
+REPORTPATH=$API_DIR/reports/$TIME-CollectionName-Test-$DAY-$MONTH.html
+
+# Actualiza Crontab
+sh $API_DIR/scripts/CronConfiguration.sh 
+
+# Genera el reporte
+newman run "$API_DIR/Test.postman_collection.json" -r htmlextra --reporter-htmlextra-export "$REPORTPATH"
