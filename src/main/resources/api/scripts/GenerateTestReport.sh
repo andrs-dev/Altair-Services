@@ -1,5 +1,5 @@
 #!/bin/bash
-# author: Andres (andreshm0608@gmail.com)
+# author: Andres (ahernandez@smart-financial-systems.com)
 # Script para guardar el reporte del estado de los servicios
 
 # Timezone
@@ -16,7 +16,6 @@ API_DIR=$(dirname "$(dirname "$(readlink -f "$0")")")
 REPORTPATH=$API_DIR/reports/$TIME-CollectionName-Test-$DAY-$MONTH.html
 
 # Actualiza Crontab
-sh $API_DIR/scripts/CronConfiguration.sh 
+sh "$API_DIR"/scripts/CronConfiguration.sh
 
-# Genera el reporte
 newman run "$API_DIR/Test.postman_collection.json" -r htmlextra --reporter-htmlextra-export "$REPORTPATH"

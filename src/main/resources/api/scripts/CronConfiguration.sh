@@ -20,22 +20,21 @@ fi
 # tempfile obtiene las entradas actuales del crontab
 crontab -l > "$tempfile.actual"
 
-# Agregar nuevas entradas al archivo temporal
-echo "* 11 * * * $SCRIPT_DIR/GenerateTestReport.sh" >> "$tempfile"
-echo "00 08 * * * $SCRIPT_DIR/GenerateTestReport.sh" >> "$tempfile"
+# Este horario es el que usara el sistema LOCAL
+# El script se asegura de encontrar las modificaciones o adiciones.
+# shellcheck disable=SC2129
+echo "00 09 * * * $SCRIPT_DIR/GenerateTestReport.sh" >> "$tempfile"
 echo "30 10 * * * $SCRIPT_DIR/GenerateTestReport.sh" >> "$tempfile"
 echo "00 13 * * * $SCRIPT_DIR/GenerateTestReport.sh" >> "$tempfile"
 echo "30 16 * * * $SCRIPT_DIR/GenerateTestReport.sh" >> "$tempfile"
 
 # Comparar el contenido actual con el contenido anterior
-if cmp -s "$tempfile.actual" "$tempfile"; then
-  echo "El crontab no ha cambiado. No se realizaron modificaciones."
-else
+if ! cmp -s "$tempfile.actual" "$tempfile"; then
   # Establecer el crontab actualizado
   crontab "$tempfile"
+
   # Actualiza el archivo ScriptSchedule.txt con la ultima version del crontab
   crontab -l > "$CRON_FILE"
-  echo "El crontab ha sido actualizado con éxito." | lolcat -a
 fi
 
 # Eliminar los archivos temporales

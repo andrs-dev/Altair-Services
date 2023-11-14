@@ -33,6 +33,7 @@ const options = {
 newman.run(options, (err) => {
     if (err) {
         console.error('Error ejecutando la colección:', err);
+        console.error('Detalles del error:', err.message, err.stack);
         process.exit(1);
     }
     console.log('La colección se ejecutó correctamente.');
