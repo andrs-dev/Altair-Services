@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Test" tests="2" time="1.198">
+  <testsuite name="API_1" id="07ddd208-2bd9-4ac0-b7a5-2796bfc46a20" timestamp="2023-11-15T21:31:00.040Z" tests="2" failures="0" errors="0" time="0.916">
+    <testcase name="Codigo de estado es 200" time="0.916" classname="Test"/>
+    <testcase name="Tiempo de respuesta es menor de 100ms" time="0.916" classname="Test"/>
+  </testsuite>
+  <testsuite name="API_2" id="2e21f924-139b-4fdf-8c34-49437d2cb876" timestamp="2023-11-15T21:31:00.040Z" tests="2" failures="0" errors="0" time="0.282">
+    <testcase name="Codigo de estado es 200" time="0.282" classname="Test"/>
+    <testcase name="Tiempo de respuesta es menor de 100ms" time="0.282" classname="Test"/>
+  </testsuite>
+</testsuites>

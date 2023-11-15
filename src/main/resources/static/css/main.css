@@ -18,3 +18,10 @@
     background-position: center;
     fill: var(--warning-icon-color);
 }
+
+#confirmMessage {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 150px;
+}

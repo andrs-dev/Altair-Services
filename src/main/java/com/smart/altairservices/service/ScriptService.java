@@ -3,85 +3,130 @@ package com.smart.altairservices.service;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Service
+@PropertySource("classpath:path.properties")
 public class ScriptService {
   
-  @Value("${root.path}")
-  private String rootPath;
-  private String path;
-  /*private final WebClient webClient;
+  @Value("${node.path}")
+  private String
+      nodePath;
   
-  @Autowired
-  public ScriptService(WebClient.Builder webClientBuilder) {
-    this.webClient = webClientBuilder.baseUrl("http://localhost:8080/execute-script").build();
-  }
-  
-  public Mono<String> executeScript() {
-    // Realizar una solicitud HTTP al servicio REST
-    return webClient.get()
-        .uri("/execute-script")
-        .retrieve()
-        .bodyToMono(String.class);
-  }*/
-  
-  @PostConstruct
-  public void init() {
-    try {
-      this.path = new File(rootPath).getCanonicalPath().concat("/src/main/resources/api/scripts/GenerateTestReport.sh");
-    } catch (IOException e) {
-      System.out.println("TaskSchedule error: " + e);
-    }
-  }
+  @Value("${newman.path}")
+  private String
+      newmanPath;
   
   // Task 08:00 am
   @Scheduled(cron = "0 0 08 * * ?")
   public void task1() {
-    System.out.println(this.path);
+    executeScript();
   }
-  
   // Task 10:30 am
   @Scheduled(cron = "0 30 10 * * ?")
   public void task2() {
-    System.out.println(this.path);
+    executeScript();
   }
   
   // Task 01:00 pm
   @Scheduled(cron = "0 0 13 * * ?")
   public void task3() {
-    System.out.println(this.path);
+    executeScript();
   }
   
   // Task 04:30 pm
   @Scheduled(cron = "* 30 16 * * ?")
   public void task4() {
-    System.out.println(this.path);
+    executeScript();
   }
   
-  // Task Everytime
- /* @Scheduled(cron = "0 * * * * ?")
-  public void taskTest() {
+  public void executeScript() {
     try {
-      ProcessBuilder processBuilder = new ProcessBuilder("/bin/bash", this.path);
-      Process process = processBuilder.start();
-      //System.out.println(this.path);
-      int exitCode = process.waitFor();
+      // Configuración de la zona horaria
+      String timezone = "America/Bogota";
+      System.setProperty("user.timezone", timezone);
+      String libraries = nodePath + " " + newmanPath;
+      String collectionName = "Test.postman_collection";
+      
+      // Obtención de la fecha y hora actual
+      String month = executeCommand("date +%b").trim().toUpperCase();
+      String day = executeCommand("date +%d").trim();
+      String time = executeCommand("date +%H%M").trim();
+      
+      // Obtención del directorio raiz (ruta relativa)
+      Path rootDir = Paths.get(".").toAbsolutePath().getParent();
+      
+      Path apiDir = rootDir.resolve("src/main/resources/api");
+      // System.out.println("APIDIR VARIABLE: " + apiDir);
+      
+      // Nomenclatura de los archivos de los reportes
+      String htmlReportPath = apiDir.resolve("reports/htmlextra")
+          .resolve(time + "-" + collectionName + "-" + day + "-" + month + ".html")
+          .toString();
+      // System.out.println("REPORTPATH VARIABLE: " + htmlReportPath);
+      
+      String xmlReportPath =
+          apiDir.resolve("reports/xml").resolve(time + "-" + collectionName + "-" + day + "-" + month + ".xml")
+              .toString();
+      // System.out.println("XMLPATH VARIABLE: " + xmlReportPath);
+      
+      // Actualización de Crontab (si es necesario)
+      executeCommand(apiDir.resolve("bash-scripts").resolve("CronConfiguration.sh").toString());
+      
+      // Creacion de los reportes en dos formatos: html y xml
+      String htmlReportCommand = libraries + " run " + apiDir.resolve("Test.postman_collection.json")
+          + " -r htmlextra --reporter-htmlextra-export " + htmlReportPath;
+      executeCommand(htmlReportCommand);
+      // Debug
+      //System.out.println("HTML COMMAND: " + htmlReportCommand);
+      
+      String xmlReportCommand = libraries + " run " + apiDir.resolve(
+          "Test.postman_collection.json") + " -r cli,junit --reporter-junit-export " + xmlReportPath;
+      executeCommand(xmlReportCommand);
+      // Debug
+      //System.out.println("XML COMMAND: " + xmlReportCommand);
+      
+      
+      System.out.println("Reporte generado correctamente.");
+    } catch (IOException | InterruptedException e) {
+      System.out.println("Error al ejecutar el script: " + e.getMessage());
+    }
+  }
+  
+  private String executeCommand(String command) throws IOException, InterruptedException {
+    try {
+      Process process = Runtime.getRuntime().exec(command);
+      process.waitFor();
+      
+      BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+      StringBuilder output = new StringBuilder();
+      String line;
+      while ((line = reader.readLine()) != null) {
+        output.append(line).append("\n");
+      }
+      
+      int exitCode = process.exitValue();
+      
       if (exitCode == 0) {
-        System.out.println("Script ejecutado exitosamente.");
+        return output.toString();
       } else {
-        System.err.println("Código de salida clase ScheduleExecutor: " + exitCode);
+        System.out.println("Algo salió mal con el comando: " + command);
+        return null;
       }
     } catch (IOException | InterruptedException e) {
-      System.out.println("GenerateTestReport Error: " + e);
+      System.out.println("Error: " + e);
     }
-  }*/
-  
-  
+    return null;
+  }
 }

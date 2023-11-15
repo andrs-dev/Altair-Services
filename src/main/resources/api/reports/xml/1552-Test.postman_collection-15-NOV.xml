@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Test" tests="2" time="0.658">
+  <testsuite name="API_1" id="7a9980af-bcd2-48ea-9a91-a420016198e9" timestamp="2023-11-15T20:52:23.015Z" tests="2" failures="1" errors="0" time="0.348">
+    <testcase name="Codigo de estado es 200" time="0.348" classname="Test">
+      <failure type="AssertionFailure" message="expected response to have status code 200 but got 429">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: e43d903b-c717-46c9-a519-e2555f859bd9.]]>
+        <![CDATA[Collection name: Test.]]>
+        <![CDATA[Request name: API_1.]]>
+        <![CDATA[Test description: Codigo de estado es 200.]]>
+        <![CDATA[Error message: expected response to have status code 200 but got 429.]]>
+        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 429
+   at Object.eval sandbox-script.js:1:1).]]>
+      </failure>
+    </testcase>
+    <testcase name="Tiempo de respuesta es menor de 100ms" time="0.348" classname="Test"/>
+  </testsuite>
+  <testsuite name="API_2" id="a90bfb13-2cb1-484e-b1d0-a56a3c23c124" timestamp="2023-11-15T20:52:23.015Z" tests="2" failures="0" errors="0" time="0.310">
+    <testcase name="Codigo de estado es 200" time="0.310" classname="Test"/>
+    <testcase name="Tiempo de respuesta es menor de 100ms" time="0.310" classname="Test"/>
+  </testsuite>
+</testsuites>

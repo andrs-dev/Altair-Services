@@ -1,41 +1,27 @@
-const newman = require('newman');
+let headerContainer = document.querySelector(".header-container");
+let confirmMessage = document.getElementById("confirmMessage");
+let generarEstado = document.getElementById("generarEstado");
 
-const collectionPath = '../../api/Test.postman_collection.json';
-const reportPath = '../../api/reports';
-const date = new Date();
-const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-let day = date.getDay().toString();
-let month = months[date.getMonth()].substring(0,3);
-let hours = date.getHours().toString();
-let minutes = date.getMinutes().toString();
-let time = hours + minutes;
+generarEstado.addEventListener('click', (event) => {
+    event.preventDefault();
 
-const options = {
-    collection: collectionPath,
-    reporters: ['htmlextra'],
-    iterationCount: 1,
-    reporter: {
-        htmlextra: {
-            export: `${reportPath}/${time}-CollectionName-Test-${month}-${day}.html`,
-            logs: true,
-            testPaging: true,
-            browserTitle: "Reporte - Altair",
-            title: "Estado de los servicios",
-            titleSize: 4,
-            skipSensitiveData: true,
-            showFolderDescription: true,
-            timezone: "America/Bogota",
-            displayProgressBar: true
-        }
-    }
-};
+    fetch('/execute-script')
+        .then((response) => {
+            console.log("Solicitud ejecutada: ", response)
+        })
+        .catch((error) => {
+            console.log("Ha ocurrido un error en la solicitud: ", error);
+        });
+    generarEstado.disabled = true;
+    generarEstado.setAttribute("class", "btn btn-dark pe-none");
+    console.log("Botón deshabilitado por dos minutos")
 
-newman.run(options, (err) => {
-    if (err) {
-        console.error('Error ejecutando la colección:', err);
-        console.error('Detalles del error:', err.message, err.stack);
-        process.exit(1);
-    }
-    console.log('La colección se ejecutó correctamente.');
-    process.exit(0);
-});
+    setTimeout(() => {
+        generarEstado.disabled = false;
+        generarEstado.setAttribute("class", "btn btn-secondary pe-auto");
+        console.log("botón habilitado.");
+    }, 120000)
+    // 600000
+    confirmMessage.innerText = "El reporte se está generando.\n Vuelve a visitar la pagina en unos minutos.";
+    headerContainer.appendChild(confirmMessage)
+})

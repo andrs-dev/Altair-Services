@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Landing Page - Start Bootstrap Theme</title>
+    <title>Altair Services</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
     <!-- Bootstrap icons-->
@@ -16,29 +16,32 @@
           type="text/css"/>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
 <!-- Navigation-->
 <nav class="navbar navbar-light bg-light static-top">
     <div class="container">
-        <a class="navbar-brand" href="#!">
+        <a class="navbar-brand" href="#">
             <img src="./assets/img/logo_smart_financial.png" alt="Logo de Smart Financial" height="60px">
         </a>
-        <a class="nav-link" href="https://github.com/PinkyBooDev/Altair-Services" target="_blank"
-           title="Github Repository">Version ALPHA</a>
+        <a style="width: 100px; padding: 4px" class="nav-link text-white btn btn-success border border-dark"
+           href="#report-history" title="Historial de Reportes">
+            Historial</a>
     </div>
 </nav>
 
-<!-- Header -->
 <header class="masthead">
     <div class="container position-relative">
         <div class="row justify-content-center">
             <div class="col-xl-6">
-                <div class="text-center text-white">
+                <div class="text-center text-white header-container">
                     <h1 class="mb-4">Servicios De Altair</h1>
-                    <a href="/execute-script" class="btn btn-secondary" target="_parent">Generar Estado</a>
+                    <a id="generarEstado" href="#" class="btn btn-secondary">Generar Reporte</a>
+                    <div class="w-100 h-auto message-container m-0">
+                        <p id="confirmMessage" class="lead"></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,9 +60,9 @@
                                      alt="">
                             </span>
                     <div class="d-flex flex-row justify-content-between w-100">
-                        <div class="">
-                            <h2 class="m-0 p-0">Ultima Actualización:</h2>
-                            <h4 class="m0 p-0" id="date-latest-test"> Date</h4>
+                        <div>
+                            <h3 class="m-0 p-0">Ultima Actualización: <span id="latestReportDate">Date</span></h3>
+                            <p id="latestReportFile" class="m0 p-0"></p>
                         </div>
                         <div>
                             <h2 class="card-text">Funcionando</h2>
@@ -68,8 +71,7 @@
                 </div>
                 <div class="card-body text-success">
                     <div class="flex-column">
-                        <p class="card-text lead mt-3">Filename.html</p>
-                        <p class="card-text lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ex
+                        <p class="card-text lead mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ex
                             amet vulputate lobortis nam lorem nobis consequat pariatur facilisi. Nostrud quod eiusmod
                             enim laboris elitr. Iriure molestie cupiditat pariatur. Sanctus accusam laboris. Lorem ipsum
                             dolor sit amet, consectetur adipiscing elit. Ex amet vulputate lobortis nam lorem nobis
@@ -82,7 +84,7 @@
 </section>
 
 <!-- Report History -->
-<section class="bg-dark">
+<section id="report-history" class="bg-dark">
     <div class="container">
         <div class="row">
             <div class="text-center text-white">
@@ -140,24 +142,34 @@
 <footer class="footer">
     <div class="container">
         <div class="row">
-            <div class="h-50 text-center text-lg-start my-0">
-                <ul class="list-inline mb-2">
-                    <li class="list-inline-item"><a
-                            href="http://192.168.10.214/smartwiki/index.php/P%C3%A1gina_principal" target="_blank">Wiki
-                    </a></li>
-                    <li class="list-inline-item">⋅</li>
-                    <li class="list-inline-item"><a href="https://github.com/PinkyBooDev/Altair-Services"
-                                                    target="_blank">
-                        Repository</a></li>
-                </ul>
-                <p class="text-muted small mb-4 mb-lg-0">&copy; Smart Financial 2023. All Rights Reserved.</p>
+            <div class="h-50 text-center text-lg-start my-0 d-flex justify-content-between">
+                <div>
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item"><a
+                                href="http://192.168.10.214/smartwiki/index.php/P%C3%A1gina_principal" target="_blank">Wiki
+                        </a></li>
+                        <li class="list-inline-item">⋅</li>
+                        <li class="list-inline-item"><a href="https://github.com/ahrdz-dev/Altair-Services"
+                                                        target="_blank">
+                            Repository</a></li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">&copy; Smart Financial 2023. All Rights
+                        Reserved.</p>
+                </div>
+                <div class="float-end text-end">
+                    <img src="./assets/img/tiny_logo_smart_financial.png" width="50" height="50"
+                         alt="">
+                    <p class="text-muted small mt-2">Version 0.3</p>
+                </div>
             </div>
         </div>
     </div>
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
+
+<script src="js/LatestFile.js"></script>
 <script src="js/GenerateReport.js"></script>
+<!--  <script src="js/GenerateReport.js"></script> -->
 </body>
 </html>
