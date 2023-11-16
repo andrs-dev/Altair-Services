@@ -25,3 +25,14 @@
     transform: translateX(-50%);
     top: 150px;
 }
+
+
+@media (max-width: 730px) {
+    .lr-container {
+        width: 80%;
+    }
+
+    .lr-icon-container {
+        margin-top: 23px !important;
+    }
+}

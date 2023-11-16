@@ -1,0 +1,4 @@
+00 09 * * * /home/sf020/AnotherProjects/AltairServices/target/classes/static/api/bash-scripts/GenerateTestReport.sh
+30 10 * * * /home/sf020/AnotherProjects/AltairServices/target/classes/static/api/bash-scripts/GenerateTestReport.sh
+00 13 * * * /home/sf020/AnotherProjects/AltairServices/target/classes/static/api/bash-scripts/GenerateTestReport.sh
+30 16 * * * /home/sf020/AnotherProjects/AltairServices/target/classes/static/api/bash-scripts/GenerateTestReport.sh

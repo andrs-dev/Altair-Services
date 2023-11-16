@@ -14,11 +14,13 @@ generarEstado.addEventListener('click', (event) => {
         });
     generarEstado.disabled = true;
     generarEstado.setAttribute("class", "btn btn-dark pe-none");
+    generarEstado.innerText = "Generando..."
     console.log("Botón deshabilitado por dos minutos")
 
     setTimeout(() => {
         generarEstado.disabled = false;
         generarEstado.setAttribute("class", "btn btn-secondary pe-auto");
+        generarEstado.innerText = "Generar Reporte"
         console.log("botón habilitado.");
     }, 120000)
     // 600000
