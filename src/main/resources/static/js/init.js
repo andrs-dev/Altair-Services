@@ -1,8 +1,20 @@
 let htmlFileAnchor = document.getElementsByClassName("htmlFileAnchor");
+
+// LATEST REPORT
 let namelatestReport = document.getElementById("namelatestReport");
 let dateLatestReport = document.getElementById("dateLatestReport");
+let testsLastReport = document.getElementById("testsLastReport");
+let failuresLastReport = document.getElementById("failuresLastReport");
+let errorsLastReport = document.getElementById("errorsLastReport");
+let statusLastReport = document.getElementById("statusLastReport");
+let timeLastReport = document.getElementById("timeLastReport");
 
-fetch("/updated-file")
+// CARD
+let containerLastReport = document.getElementById("lr-container");
+let headerLastReport = document.getElementById("lr-header");
+
+// HTML
+fetch('updated-file')
     .then(response => {
         if (response.ok) {
             return response.json();
@@ -18,29 +30,66 @@ fetch("/updated-file")
         } else {
             namelatestReport.innerText = data.fileName;
             dateLatestReport.innerText = data.fileDate;
-            console.log(data.htmlFilePath);
+            //console.log(data.htmlFilePath);
             for (let i = 0; i < htmlFileAnchor.length; i++) {
                 htmlFileAnchor[i].setAttribute("href", data.htmlFilePath);
             }
+
+
+            // XML
+            fetch(data.xmlFilePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Ha ocurrido un error cargando un archivo.');
+                    }
+                    return response.text();
+                })
+                .then(xmlContent => {
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(xmlContent, 'application/xml');
+                    console.log(xmlDoc);
+                    const testsuite = xmlDoc.getElementsByTagName('testsuite');
+                    const testsuites = xmlDoc.getElementsByTagName('testsuites');
+
+                    let failuresCount = 0;
+                    let errorsCount = 0;
+                    for (let i = 0; i < testsuite.length; i++) {
+                        const failureIterator = parseInt(testsuite[i].getAttribute("failures").toString());
+                        const errorIterator = parseInt(testsuite[i].getAttribute("errors").toString());
+                        failuresCount += failureIterator;
+                        errorsCount += errorIterator;
+                    }
+                    testsLastReport.innerText = testsuites[0].getAttribute("tests").toString();
+                    failuresLastReport.innerText = failuresCount.toString();
+                    errorsLastReport.innerText = errorsCount.toString();
+                    timeLastReport.innerText = testsuites[0].getAttribute("time").toString();
+
+                    if (failuresCount <= 3 && errorsCount === 0) {
+                        statusLastReport.innerText = "Funcionando";
+                        containerLastReport.classList.add("border-success");
+                        headerLastReport.classList.add("text-bg-success");
+                        for (let i = 0; i < htmlFileAnchor.length; i++) {
+                            htmlFileAnchor[i].classList.add("text-bg-success")
+                        }
+                    } else if (failuresCount > 3 && failuresCount <= 10 && errorsCount === 0) {
+                        statusLastReport.innerText = "Con Algunos Defectos"
+                        containerLastReport.classList.add("border-warning");
+                        headerLastReport.classList.add("text-bg-warning")
+                        for (let i = 0; i < htmlFileAnchor.length; i++) {
+                            htmlFileAnchor[i].classList.add("text-bg-warning")
+                        }
+                    } else {
+                        statusLastReport.innerText = "Fallando";
+                        containerLastReport.classList.add("border-danger")
+                        headerLastReport.classList.add("text-bg-danger")
+                        for (let i = 0; i < htmlFileAnchor.length; i++) {
+                            htmlFileAnchor[i].classList.add("text-bg-danger")
+                        }
+                    }
+                }).catch(error => {
+                console.error('Error al cargar el archivo XML:', error);
+            });
         }
     })
     .catch(error => console.error("Error al obtener el último archivo:", error));
-
-fetch('/updated-file')
-    .then(response => response.text())
-    .then(data => {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(data.xmlFilePath, 'application/xml');
-
-        // Obtener el valor del atributo 'tests' en el elemento 'testsuite'
-        const testCount = xmlDoc.querySelector('testsuite').getAttribute('failures');
-        console.log('Valor del atributo tests:', testCount);
-
-        // Obtener el valor del atributo "failures" en el elemento "testsuite"
-        const failuresCount = xmlDoc.querySelector('testsuite').getAttribute('errors');
-        console.log('Valor del atributo failures:', failuresCount);
-    })
-    .catch(error => {
-        console.error('Error al cargar el archivo XML:', error);
-    });
 

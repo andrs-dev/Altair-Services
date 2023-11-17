@@ -19,7 +19,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
-@PropertySource("classpath:path.properties")
 public class ScriptService {
   
   @Value("${node.path}")
@@ -30,12 +29,17 @@ public class ScriptService {
   private String
       newmanPath;
   
-  private final ResourceLoader resourceLoader;
+  @Value("${api.directory}")
+  private String apiDir;
   
-  @Autowired
-  public ScriptService(ResourceLoader resourceLoader) {
-    this.resourceLoader = resourceLoader;
-  }
+  @Value("${reports.html}")
+  private String htmlReportsDir;
+  
+  @Value("${reports.xml}")
+  private String xmlReportsDir;
+  
+  @Value("${bash.scripts}")
+  private String bashScripts;
   
   // Task 08:00 am
   @Scheduled(cron = "0 0 08 * * ?")
@@ -71,46 +75,40 @@ public class ScriptService {
       String timezone = "America/Bogota";
       System.setProperty("user.timezone", timezone);
       String libraries = nodePath + " " + newmanPath;
-      String collectionName = "Test.postman_collection";
+      String collectionName = "TRX-BDV-NOV2023";
       
       // Obtención de la fecha y hora actual
       String month = executeCommand("date +%b").trim().toUpperCase();
       String day = executeCommand("date +%d").trim();
       String time = executeCommand("date +%H%M").trim();
       
-      // Obtención del directorio raiz (ruta relativa)
-      Resource apiDir = resourceLoader.getResource("classpath:static/api/");
-      Resource htmlReportsDir = resourceLoader.getResource("classpath:static/api/reports/htmlextra/");
-      Resource xmlReportsDir = resourceLoader.getResource("classpath:static/api/reports/xml/");
-      Resource bashScripts = resourceLoader.getResource("classpath:static/api/bash-scripts/");
-      
-       System.out.println("APIDIR VARIABLE: " + apiDir);
+      System.out.println("APIDIR VARIABLE: " + apiDir);
       
       // Nomenclatura de los archivos de los reportes
-      String htmlReportPath = htmlReportsDir.getFile() + "/" + time + "-" + collectionName + "-" + day + "-" + month +
+      String htmlReportPath = htmlReportsDir + "/" + time + "-" + collectionName + "-" + day + "-" + month +
           ".html";
        System.out.println("REPORTPATH VARIABLE: " + htmlReportPath);
       
-      String xmlReportPath = xmlReportsDir.getFile() + "/" + time + "-" + collectionName + "-" + day + "-" + month +
+      String xmlReportPath = xmlReportsDir + "/" + time + "-" + collectionName + "-" + day + "-" + month +
           ".xml";
        System.out.println("XMLPATH VARIABLE: " + xmlReportPath);
       
       // Actualización de Crontab local (si es necesario)
-      executeCommand(bashScripts.getFile() + "/CronConfiguration.sh");
+      executeCommand(bashScripts + "/CronConfiguration.sh");
       
+      System.out.println("Generando reportes...");
       // Creacion de los reportes en dos formatos: html y xml
-      String htmlReportCommand = libraries + " run " + apiDir.getFile() + "/Test.postman_collection.json"
-          + " -r htmlextra --reporter-htmlextra-export " + htmlReportPath;
-      executeCommand(htmlReportCommand);
-      // Debug
-      //System.out.println("HTML COMMAND: " + htmlReportCommand);
-      
-      String xmlReportCommand = libraries + " run " + apiDir.getFile() +
-          "/Test.postman_collection.json" + " -r cli,junit --reporter-junit-export " + xmlReportPath;
+      String xmlReportCommand = libraries + " run " + apiDir +
+              "/" + collectionName + ".json" + " -r cli,junit --reporter-junit-export " + xmlReportPath;
       executeCommand(xmlReportCommand);
       // Debug
       //System.out.println("XML COMMAND: " + xmlReportCommand);
       
+      String htmlReportCommand = libraries + " run " + apiDir + "/" + collectionName + ".json" + " -r htmlextra " +
+              "--reporter-htmlextra-export " + htmlReportPath;
+      executeCommand(htmlReportCommand);
+      // Debug
+      //System.out.println("HTML COMMAND: " + htmlReportCommand);
       
       System.out.println("Reporte generado correctamente.");
     } catch (IOException | InterruptedException e) {

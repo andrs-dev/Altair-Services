@@ -26,6 +26,12 @@
     top: 150px;
 }
 
+.loading-icon {
+    position: absolute;
+    left: 49%;
+    top: 220px;
+}
+
 
 @media (max-width: 730px) {
     .lr-container {

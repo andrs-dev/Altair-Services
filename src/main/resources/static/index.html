@@ -38,9 +38,11 @@
             <div class="col-xl-6">
                 <div class="text-center text-white header-container">
                     <h1 class="mb-4">Servicios De Altair</h1>
-                    <a id="generarEstado" href="#" class="btn btn-secondary">Generar Reporte</a>
+                    <a id="generarEstado" href="#" class="btn btn-secondary">Generar
+                        Reporte</a>
                     <div class="w-100 h-auto message-container m-0">
                         <p id="confirmMessage" class="lead"></p>
+                        <span class="loading-icon"></span>
                     </div>
                 </div>
             </div>
@@ -52,8 +54,8 @@
 <section class="bg-light">
     <div class="container">
         <div class="row">
-            <div class="card border-success my-5 mx-auto p-0 m-0 lr-container" style="max-width: 100%;">
-                <div class="card-header text-bg-success d-flex flex-row">
+            <div id="lr-container" class="card my-5 mx-auto p-0 m-0" style="max-width: 100%;">
+                <div id="lr-header" class="card-header d-flex flex-row">
                             <span class="lr-icon-container h-auto my-auto">
                                 <img
                                         class="check-circle-icon text-white h-auto me-3"
@@ -62,29 +64,50 @@
                             </span>
                     <div class="d-flex flex-row justify-content-between w-100 h-100">
                         <div>
-                            <h3 class="m-0 p-0 fs-3">Último Reporte:</h3>
-                            <span id="dateLatestReport"></span>
+                            <h3 class="m-0 p-0 fs-3">Último Reporte: <span id="dateLatestReport"></span></h3>
+
+                            <p class="m-0 fw-bold small">Archivo: <a id="namelatestReport"
+                                                                     class="htmlFileAnchor p-0 w-100 text-decoration-underline"
+                                                                     target="_blank"></a>
+                            </p>
                         </div>
                         <div>
-                            <h2>Funcionando</h2>
+                            <h2 id="statusLastReport"></h2>
                         </div>
                     </div>
                 </div>
-                <div class="card-body text-success">
-                    <div class="flex-column">
-                        <p class="m-0 fw-bold small">File:  <a id="namelatestReport"
-                                                        class="htmlFileAnchor text-success p-0 w-100 text-decoration-underline "
-                                                 target="_blank"></a>
-                        </p>
-                        <p class="card-text lead mt-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ex
-                            amet vulputate lobortis nam lorem nobis consequat pariatur facilisi. Nostrud quod eiusmod
-                            enim laboris elitr. Iriure molestie cupiditat pariatur. Sanctus accusam laboris. Lorem ipsum
-                            dolor sit amet, consectetur adipiscing elit. Ex amet vulputate lobortis nam lorem nobis
-                            consequat pariatur facilisi.</p>
-                        <a style="right: 2% !important; top: 75% !important;"
-                           class="htmlFileAnchor position-absolute end-10 top-10 btn btn-success" target="_blank">Ver
-                            Reporte</a>
+                <div class="card-body">
+                    <div class="d-flex flex-row justify-content-between">
+                        <div class="d-flex gap-4">
+                            <p
+                                    class="lead text-bg-info bg-opacity-25 badge border border-info border-2 text-black p-3 fs-6">
+                                Servicios Testeados:
+                                <span id="testsLastReport"></span>
+                            </p>
+                            <p
+                                    class="lead text-bg-warning bg-opacity-25 badge border border-warning border-2 text-black p-3 fs-6">
+                                Fallos:
+                                <span id="failuresLastReport"></span>
+                            </p>
+                            <p
+                                    class="lead text-bg-danger bg-opacity-25 badge border border-danger border-2 text-black p-3 fs-6">
+                                Errores:
+                                <span id="errorsLastReport"></span>
+                            </p>
+                        </div>
+                        <div>
+                            <a
+                               class="htmlFileAnchor btn btn-success fw-bold position-relative top-110-px"
+                               target="_blank">Ver
+                                Reporte</a>
+                        </div>
                     </div>
+                    <p class="card-text">El reporte a tomado <span id="timeLastReport"></span> segundos en completarse.</p>
+                    <p class="card-text m-0">Un <span class="text-warning text-decoration-underline">Fallo</span> sucede cuando un servicio no
+                        logra los
+                        resultados esperados.</p>
+                    <p class="card-text  m-0">Un <span class="text-danger text-decoration-underline">Error</span> representa una mala
+                        respuesta del servicio.</p>
                 </div>
             </div>
         </div>

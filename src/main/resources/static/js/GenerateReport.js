@@ -1,7 +1,7 @@
 let headerContainer = document.querySelector(".header-container");
 let confirmMessage = document.getElementById("confirmMessage");
 let generarEstado = document.getElementById("generarEstado");
-
+let loadingIcon = document.querySelector(".loading-icon");
 generarEstado.addEventListener('click', (event) => {
     event.preventDefault();
 
@@ -14,16 +14,13 @@ generarEstado.addEventListener('click', (event) => {
         });
     generarEstado.disabled = true;
     generarEstado.setAttribute("class", "btn btn-dark pe-none");
-    generarEstado.innerText = "Generando..."
-    console.log("Botón deshabilitado por dos minutos")
+    generarEstado.innerText = "Generando...";
+    console.log("Botón deshabilitado por dos minutos");
 
     setTimeout(() => {
-        generarEstado.disabled = false;
-        generarEstado.setAttribute("class", "btn btn-secondary pe-auto");
-        generarEstado.innerText = "Generar Reporte"
-        console.log("botón habilitado.");
+        window.location.reload();
     }, 120000)
-    // 600000
+    loadingIcon.classList.add("spinner-border");
     confirmMessage.innerText = "El reporte se está generando.\n Vuelve a visitar la pagina en unos minutos.";
     headerContainer.appendChild(confirmMessage)
 })
