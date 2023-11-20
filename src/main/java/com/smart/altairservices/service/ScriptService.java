@@ -1,5 +1,6 @@
 package com.smart.altairservices.service;
 
+import com.smart.altairservices.Directories;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,26 +21,11 @@ import java.nio.file.Paths;
 
 @Service
 public class ScriptService {
-  
-  @Value("${node.path}")
-  private String
-      nodePath;
-  
-  @Value("${newman.path}")
-  private String
-      newmanPath;
-  
-  @Value("${api.directory}")
-  private String apiDir;
-  
-  @Value("${reports.html}")
-  private String htmlReportsDir;
-  
-  @Value("${reports.xml}")
-  private String xmlReportsDir;
-  
-  @Value("${bash.scripts}")
-  private String bashScripts;
+  private final Directories directories;
+  @Autowired
+  public ScriptService(Directories directories) {
+    this.directories = directories;
+  }
   
   // Task 08:00 am
   @Scheduled(cron = "0 0 08 * * ?")
@@ -74,7 +60,7 @@ public class ScriptService {
       // Configuración de la zona horaria
       String timezone = "America/Bogota";
       System.setProperty("user.timezone", timezone);
-      String libraries = nodePath + " " + newmanPath;
+      String libraries = directories.nodePath + " " + directories.newmanPath;
       String collectionName = "TRX-BDV-NOV2023";
       
       // Obtención de la fecha y hora actual
@@ -82,29 +68,30 @@ public class ScriptService {
       String day = executeCommand("date +%d").trim();
       String time = executeCommand("date +%H%M").trim();
       
-      System.out.println("APIDIR VARIABLE: " + apiDir);
+      //System.out.println("APIDIR VARIABLE: " + directories.apiDir);
       
       // Nomenclatura de los archivos de los reportes
-      String htmlReportPath = htmlReportsDir + "/" + time + "-" + collectionName + "-" + day + "-" + month +
+      String htmlReportPath = directories.htmlReportsDir + "/" + time + "-" + collectionName + "-" + day + "-" + month +
           ".html";
-       System.out.println("REPORTPATH VARIABLE: " + htmlReportPath);
+      //System.out.println("REPORTPATH VARIABLE: " + htmlReportPath);
       
-      String xmlReportPath = xmlReportsDir + "/" + time + "-" + collectionName + "-" + day + "-" + month +
+      String xmlReportPath = directories.xmlReportsDir + "/" + time + "-" + collectionName + "-" + day + "-" + month +
           ".xml";
-       System.out.println("XMLPATH VARIABLE: " + xmlReportPath);
+      //System.out.println("XMLPATH VARIABLE: " + xmlReportPath);
       
       // Actualización de Crontab local (si es necesario)
-      executeCommand(bashScripts + "/CronConfiguration.sh");
+      executeCommand(directories.bashScripts + "/CronConfiguration.sh");
       
       System.out.println("Generando reportes...");
       // Creacion de los reportes en dos formatos: html y xml
-      String xmlReportCommand = libraries + " run " + apiDir +
+      String xmlReportCommand = libraries + " run " + directories.apiDir +
               "/" + collectionName + ".json" + " -r cli,junit --reporter-junit-export " + xmlReportPath;
       executeCommand(xmlReportCommand);
       // Debug
       //System.out.println("XML COMMAND: " + xmlReportCommand);
       
-      String htmlReportCommand = libraries + " run " + apiDir + "/" + collectionName + ".json" + " -r htmlextra " +
+      String htmlReportCommand = libraries + " run " + directories.apiDir + "/" + collectionName + ".json" + " -r " +
+              "htmlextra " +
               "--reporter-htmlextra-export " + htmlReportPath;
       executeCommand(htmlReportCommand);
       // Debug

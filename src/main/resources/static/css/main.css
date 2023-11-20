@@ -3,7 +3,7 @@
     --warning-icon-color: #6a1a21;
 }
 
-.check-circle-icon {
+.icon-lr {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -11,18 +11,10 @@
     height: 50px;
 }
 
-.warning-circle-color {
-    background-image: url("../assets/icons/exclamation-circle-fill.svg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    fill: var(--warning-icon-color);
-}
-
 #confirmMessage {
     position: absolute;
-    left: 50%;
     transform: translateX(-50%);
+    left: 50%;
     top: 150px;
 }
 
@@ -32,6 +24,18 @@
     top: 220px;
 }
 
+.lr-stats {
+    display: flex !important;
+    justify-content: space-between !important;
+}
+
+.lr-text-body {
+    text-align: left;
+}
+
+.nav-link:hover {
+    border: #000 1px solid;
+}
 
 @media (max-width: 730px) {
     .lr-container {
@@ -40,5 +44,58 @@
 
     .lr-icon-container {
         margin-top: 23px !important;
+    }
+
+    #confirmMessage {
+        top: 130px;
+    }
+
+    .loading-icon {
+        position: relative;
+        left: 0;
+        top: 120px;
+    }
+
+    .see-lr {
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 538px) {
+    .navbar-anchors {
+       display: none !important;
+    }
+
+    .navbar-menu {
+        display: block !important;
+        width: 80px !important;
+    }
+}
+
+@media (max-width: 495px) {
+    .lr-stats {
+        flex-direction: column !important;
+        height: 100% !important;
+        width: 100% !important;
+        gap: 0 !important;
+    }
+
+    .card-body {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px;
+    }
+
+    .lr-text-body {
+        width: 100%;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .see-lr {
+        margin-top: 20px;
+        justify-self: center !important;
+        width: 100%;
     }
 }

@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ScriptController {
-  
-  private final ScriptService scriptService;
-  
-  @Autowired
-  public ScriptController(ScriptService scriptService) {
-    this.scriptService = scriptService;
-  }
-  
-  @GetMapping("/execute-script")
-  public void execute() {
-    scriptService.executeScript();
-  }
+    
+    private final ScriptService scriptService;
+    
+    @Autowired
+    public ScriptController(ScriptService scriptService) {
+        this.scriptService = scriptService;
+    }
+    
+    @GetMapping("/execute-script")
+    public void execute() {
+        scriptService.executeScript();
+    }
 }

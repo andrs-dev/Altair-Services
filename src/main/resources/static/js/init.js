@@ -1,6 +1,10 @@
 let htmlFileAnchor = document.getElementsByClassName("htmlFileAnchor");
 
+// NAV
+let navLink = document.getElementsByClassName("nav-link");
+
 // LATEST REPORT
+let iconLatestReport = document.querySelector(".icon-lr")
 let namelatestReport = document.getElementById("namelatestReport");
 let dateLatestReport = document.getElementById("dateLatestReport");
 let testsLastReport = document.getElementById("testsLastReport");
@@ -13,6 +17,9 @@ let timeLastReport = document.getElementById("timeLastReport");
 let containerLastReport = document.getElementById("lr-container");
 let headerLastReport = document.getElementById("lr-header");
 
+// REPORT LIST
+let reportsList = document.querySelector(".reports-list");
+
 // HTML
 fetch('updated-file')
     .then(response => {
@@ -23,7 +30,7 @@ fetch('updated-file')
         }
     })
     .then(data => {
-        console.log(data);
+        //console.log(data);
 
         if ("error" in data) {
             console.error(data.error);
@@ -47,7 +54,7 @@ fetch('updated-file')
                 .then(xmlContent => {
                     const parser = new DOMParser();
                     const xmlDoc = parser.parseFromString(xmlContent, 'application/xml');
-                    console.log(xmlDoc);
+                    //console.log(xmlDoc);
                     const testsuite = xmlDoc.getElementsByTagName('testsuite');
                     const testsuites = xmlDoc.getElementsByTagName('testsuites');
 
@@ -66,24 +73,30 @@ fetch('updated-file')
 
                     if (failuresCount <= 3 && errorsCount === 0) {
                         statusLastReport.innerText = "Funcionando";
+                        iconLatestReport.setAttribute("src", "assets/icons/check-circle-fill.svg");
                         containerLastReport.classList.add("border-success");
                         headerLastReport.classList.add("text-bg-success");
                         for (let i = 0; i < htmlFileAnchor.length; i++) {
                             htmlFileAnchor[i].classList.add("text-bg-success")
+                            navLink[i].classList.add("btn-success");
                         }
                     } else if (failuresCount > 3 && failuresCount <= 10 && errorsCount === 0) {
-                        statusLastReport.innerText = "Con Algunos Defectos"
+                        statusLastReport.innerText = "Con Algunos Defectos";
+                        iconLatestReport.setAttribute("src", "assets/icons/exclamation-circle-fill.svg");
                         containerLastReport.classList.add("border-warning");
                         headerLastReport.classList.add("text-bg-warning")
                         for (let i = 0; i < htmlFileAnchor.length; i++) {
                             htmlFileAnchor[i].classList.add("text-bg-warning")
+                                navLink[i].classList.add("btn-warning")
                         }
                     } else {
                         statusLastReport.innerText = "Fallando";
+                        iconLatestReport.setAttribute("src", "assets/icons/exclamation-circle-fill.svg")
                         containerLastReport.classList.add("border-danger")
                         headerLastReport.classList.add("text-bg-danger")
                         for (let i = 0; i < htmlFileAnchor.length; i++) {
                             htmlFileAnchor[i].classList.add("text-bg-danger")
+                            navLink[i].classList.add("btn-danger");
                         }
                     }
                 }).catch(error => {
@@ -91,5 +104,29 @@ fetch('updated-file')
             });
         }
     })
-    .catch(error => console.error("Error al obtener el último archivo:", error));
 
+// HTML
+fetch('/all-files') // Ajusta la ruta según tu configuración
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error(`Error al obtener la lista de archivos. Código de estado: ${response.status}`);
+        }
+    })
+    .then(data => {
+        //console.log(data);
+        data.forEach((fileInfo, index) => {
+            const listItem = document.createElement('li');
+            listItem.className = "list-group-item d-flex justify-content-between pb-0 mx-4";
+            listItem.innerHTML = `
+        <div class="ms-2 me-auto">
+            <div class="fw-bold">Reporte #${index + 1}</div>
+            <p>${fileInfo.fileDate}</p>
+        </div>
+        <a class="text-dark text-decoration-underline h-25" href="${fileInfo.filePath}" target="_blank">${fileInfo.fileName}</a>
+    `;
+        //console.log(fileInfo.filePath)
+            reportsList.appendChild(listItem);
+        });
+    })

@@ -26,9 +26,29 @@
         <a class="navbar-brand" href="#">
             <img src="./assets/img/logo_smart_financial.png" alt="Logo de Smart Financial" height="60px">
         </a>
-        <a style="width: 100px; padding: 4px" class="nav-link text-white btn btn-success border border-dark"
-           href="#report-history" title="Historial de Reportes">
-            Historial</a>
+        <div class="navbar-anchors d-flex gap-3 justify-content-end">
+            <a style="width: 170px; padding: 4px" href="api/TRX-BDV-NOV2023.json"
+               class="nav-link text-white btn"
+               title="Vinculo de Descarga" download="TRX-BDV-NOV2023.json">
+                Descargar Colección</a>
+            <a style="width: 100px; padding: 4px" class="nav-link text-white btn"
+               href="#report-history" title="Historial de Reportes">
+                Historial</a>
+        </div>
+        <div class="navbar-menu btn-group d-none">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                <i class="bi bi-list"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+                <li><a href="api/TRX-BDV-NOV2023.json"
+                       class="dropdown-item"
+                       title="Vinculo de Descarga" download="TRX-BDV-NOV2023.json">
+                    Descargar Colección</a></li>
+                <li><a class="dropdown-item"
+                        href="#report-history" title="Historial de Reportes">
+                    Historial</a></li>
+            </ul>
+        </div>
     </div>
 </nav>
 
@@ -51,16 +71,13 @@
 </header>
 
 <!-- Last Report-->
-<section class="bg-light">
+<section class="bg-light mb-4">
     <div class="container">
         <div class="row">
             <div id="lr-container" class="card my-5 mx-auto p-0 m-0" style="max-width: 100%;">
                 <div id="lr-header" class="card-header d-flex flex-row">
                             <span class="lr-icon-container h-auto my-auto">
-                                <img
-                                        class="check-circle-icon text-white h-auto me-3"
-                                        src="./assets/icons/check-circle-fill.svg"
-                                        alt="">
+                                <img src="" class="icon-lr text-white h-auto me-3" alt="">
                             </span>
                     <div class="d-flex flex-row justify-content-between w-100 h-100">
                         <div>
@@ -77,8 +94,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex flex-row justify-content-between">
-                        <div class="d-flex gap-4">
+                    <div class=" d-flex flex-row justify-content-between">
+                        <div class="lr-stats d-flex gap-4">
                             <p
                                     class="lead text-bg-info bg-opacity-25 badge border border-info border-2 text-black p-3 fs-6">
                                 Servicios Testeados:
@@ -95,19 +112,21 @@
                                 <span id="errorsLastReport"></span>
                             </p>
                         </div>
-                        <div>
-                            <a
-                               class="htmlFileAnchor btn btn-success fw-bold position-relative top-110-px"
-                               target="_blank">Ver
+                    </div>
+                    <div class="lr-text-body d-flex justify-content-between">
+                        <div class="flex-column">
+                            <p class="card-text">El reporte a tomado <span id="timeLastReport"></span> segundos en
+                                completarse.</p>
+                            <p class="card-text m-0">Un <span class="text-warning fw-bold text-decoration-underline">Fallo
+                            </span> sucede cuando un servicio no logra los resultados esperados.</p>
+                            <p class="card-text  m-0">Un <span class="text-danger fw-bold text-decoration-underline">Error
+                            </span> representa una mala respuesta del servicio.</p>
+                        </div>
+                        <div class="see-lr align-self-end">
+                            <a class="htmlFileAnchor btn btn-success fw-bold" target="_blank">Ver
                                 Reporte</a>
                         </div>
                     </div>
-                    <p class="card-text">El reporte a tomado <span id="timeLastReport"></span> segundos en completarse.</p>
-                    <p class="card-text m-0">Un <span class="text-warning text-decoration-underline">Fallo</span> sucede cuando un servicio no
-                        logra los
-                        resultados esperados.</p>
-                    <p class="card-text  m-0">Un <span class="text-danger text-decoration-underline">Error</span> representa una mala
-                        respuesta del servicio.</p>
                 </div>
             </div>
         </div>
@@ -121,79 +140,9 @@
             <div class="text-center text-white">
                 <h2 class="mt-4">Historial De Reportes</h2>
             </div>
-            <ol class="list-group list-group-numbered my-4 mx-auto w-100 bg-dark">
-                <li class="list-group-item list-group-item-dark d-flex justify-content-between pb-0 mx-4">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Report #{num}</div>
-                        <p>Full Date</p>
-                    </div>
-                    <p>File URL</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between pb-0 mx-4">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Report #{num}</div>
-                        <p>Full Date</p>
-                    </div>
-                    <p>File URL</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between pb-0 mx-4">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Report #{num}</div>
-                        <p>Full Date</p>
-                    </div>
-                    <p>File URL</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between pb-0 mx-4">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Report #{num}</div>
-                        <p>Full Date</p>
-                    </div>
-                    <p>File URL</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between pb-0 mx-4">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Report #{num}</div>
-                        <p>Full Date</p>
-                    </div>
-                    <p>File URL</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between pb-0 mx-4">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Report #{num}</div>
-                        <p>Full Date</p>
-                    </div>
-                    <p>File URL</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between pb-0 mx-4">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Report #{num}</div>
-                        <p>Full Date</p>
-                    </div>
-                    <p>File URL</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between pb-0 mx-4">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Report #{num}</div>
-                        <p>Full Date</p>
-                    </div>
-                    <p>File URL</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between pb-0 mx-4">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Report #{num}</div>
-                        <p>Full Date</p>
-                    </div>
-                    <p>File URL</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between pb-0 mx-4">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Report #{num}</div>
-                        <p>Full Date</p>
-                    </div>
-                    <p>File URL</p>
-                </li>
-            </ol>
-            <a href="#" class="lead mb-4 text-white d-flex justify-content-end">Historial Completo</a>
+            <ol class="reports-list list-group list-group-numbered my-4 mx-auto w-100 bg-dark"></ol>
+            <!-- <a href="#" class="lead mb-4 text-white d-flex justify-content-end">Historial Completo</a> -->
+            <div class="mb-5"></div>
         </div>
     </div>
 </section>
@@ -205,11 +154,12 @@
                 <div>
                     <ul class="list-inline mb-2">
                         <li class="list-inline-item"><a
-                                href="http://192.168.10.214/smartwiki/index.php/P%C3%A1gina_principal" target="_blank">Wiki
+                                href="http://192.168.10.214/smartwiki/index.php/P%C3%A1gina_principal"
+                                target="_blank" class="text-dark text-decoration-none">Wiki
                         </a></li>
                         <li class="list-inline-item">⋅</li>
                         <li class="list-inline-item"><a href="https://github.com/ahrdz-dev/Altair-Services"
-                                                        target="_blank">
+                                                        target="_blank" class="text-dark text-decoration-none">
                             Repository</a></li>
                     </ul>
                     <p class="text-muted small mb-4 mb-lg-0">&copy; Smart Financial 2023. All Rights
@@ -218,7 +168,7 @@
                 <div class="float-end text-end">
                     <img src="./assets/img/tiny_logo_smart_financial.png" width="50" height="50"
                          alt="">
-                    <p class="text-muted small mt-2">Version 0.3</p>
+                    <p class="text-muted small mt-2">Version 1.0</p>
                 </div>
             </div>
         </div>
@@ -229,7 +179,6 @@
 
 <script src="js/init.js"></script>
 <script src="js/GenerateReport.js"></script>
-<script src="js/main.js"></script>
 <!--  <script src="js/GenerateReport.js"></script> -->
 </body>
 </html>

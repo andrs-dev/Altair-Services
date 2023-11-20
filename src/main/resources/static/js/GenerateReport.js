@@ -5,7 +5,7 @@ let loadingIcon = document.querySelector(".loading-icon");
 generarEstado.addEventListener('click', (event) => {
     event.preventDefault();
 
-    fetch('/execute-script')
+    fetch('/execute-scrip')
         .then((response) => {
             console.log("Solicitud ejecutada: ", response)
         })
