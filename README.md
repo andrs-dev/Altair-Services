@@ -11,11 +11,15 @@ Minimum version is 1.18
 ### Via NVM
 > nvm install 18
 
+### Via NodeSource
+> curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+> sudo apt install nodejs
+
 ## Configuration
 You'll need to go to src/main/resources/application.properties. 
 There you need to write the absolute path of the 
 dependencies. Also,
-take the absolute paths of somes directories:
+you need the path of these directories:
 - Api Directory (src/main/resources/static/api),
 - HTML reports directory 
 (src/main/resources/static/api/reports/htmlextra),
