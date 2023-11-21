@@ -16,7 +16,7 @@ public class LastFileController {
         this.lastFileService = lastFileService;
     }
     
-    @GetMapping("/updated-file")
+    @GetMapping("/last-file")
     @ResponseBody
     public Object execute() {
         return lastFileService.latestReportFile();

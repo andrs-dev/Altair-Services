@@ -1,10 +1,4 @@
 # Installation
-## Installing newman
-> npm install -g newman
-
-## Installing report-type
-> npm install -g newman-reporter-htmlextra
-
 ## Installing NodeJs
 Minimum version is 1.18
 
@@ -12,8 +6,15 @@ Minimum version is 1.18
 > nvm install 18
 
 ### Via NodeSource
-> curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-> sudo apt install nodejs
+> curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash - sudo apt install nodejs
+> 
+## Installing newman
+> npm install -g newman
+
+### Installing report type
+> npm install -g newman-reporter-htmlextra
+
+
 
 ## Configuration
 You'll need to go to src/main/resources/application.properties. 

@@ -20,9 +20,13 @@
 
 .loading-icon {
     position: absolute;
-    left: 49%;
-    top: 220px;
+    top: 240px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
+
 
 .lr-stats {
     display: flex !important;
@@ -37,6 +41,10 @@
     border: #000 1px solid;
 }
 
+footer > div > div > div > div > ul > li > a:hover {
+    text-decoration: underline !important;
+}
+
 @media (max-width: 730px) {
     .lr-container {
         width: 80%;
@@ -48,12 +56,6 @@
 
     #confirmMessage {
         top: 130px;
-    }
-
-    .loading-icon {
-        position: relative;
-        left: 0;
-        top: 120px;
     }
 
     .see-lr {

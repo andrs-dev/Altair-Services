@@ -36,7 +36,8 @@
                 Historial</a>
         </div>
         <div class="navbar-menu btn-group d-none">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    data-bs-display="static" aria-expanded="false">
                 <i class="bi bi-list"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
@@ -45,21 +46,22 @@
                        title="Vinculo de Descarga" download="TRX-BDV-NOV2023.json">
                     Descargar Colección</a></li>
                 <li><a class="dropdown-item"
-                        href="#report-history" title="Historial de Reportes">
+                       href="#report-history" title="Historial de Reportes">
                     Historial</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
+<!-- Masthead-->
 <header class="masthead">
     <div class="container position-relative">
         <div class="row justify-content-center">
             <div class="col-xl-6">
                 <div class="text-center text-white header-container">
                     <h1 class="mb-4">Servicios De Altair</h1>
-                    <a id="generarEstado" href="#" class="btn btn-secondary">Generar
-                        Reporte</a>
+                    <button id="generarEstado" class="btn btn-secondary">Generar
+                        Reporte</button>
                     <div class="w-100 h-auto message-container m-0">
                         <p id="confirmMessage" class="lead"></p>
                         <span class="loading-icon"></span>
@@ -71,7 +73,7 @@
 </header>
 
 <!-- Last Report-->
-<section class="bg-light mb-4">
+<section class="bg-light">
     <div class="container">
         <div class="row">
             <div id="lr-container" class="card my-5 mx-auto p-0 m-0" style="max-width: 100%;">
@@ -94,7 +96,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class=" d-flex flex-row justify-content-between">
+                    <div class="d-flex flex-row justify-content-between">
                         <div class="lr-stats d-flex gap-4">
                             <p
                                     class="lead text-bg-info bg-opacity-25 badge border border-info border-2 text-black p-3 fs-6">
@@ -140,7 +142,7 @@
             <div class="text-center text-white">
                 <h2 class="mt-4">Historial De Reportes</h2>
             </div>
-            <ol class="reports-list list-group list-group-numbered my-4 mx-auto w-100 bg-dark"></ol>
+            <ul class="reports-list list-group my-4 mx-auto w-100 bg-dark"></ul>
             <!-- <a href="#" class="lead mb-4 text-white d-flex justify-content-end">Historial Completo</a> -->
             <div class="mb-5"></div>
         </div>
@@ -166,9 +168,11 @@
                         Reserved.</p>
                 </div>
                 <div class="float-end text-end">
-                    <img src="./assets/img/tiny_logo_smart_financial.png" width="50" height="50"
-                         alt="">
-                    <p class="text-muted small mt-2">Version 1.0</p>
+                    <a href="/">
+                        <img src="./assets/img/tiny_logo_smart_financial.png" width="40" height="40"
+                             alt="">
+                    </a>
+                    <p class="text-muted small mt-2">Version 0.6:BETA</p>
                 </div>
             </div>
         </div>

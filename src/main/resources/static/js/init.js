@@ -1,4 +1,5 @@
 let htmlFileAnchor = document.getElementsByClassName("htmlFileAnchor");
+let placeholders = document.getElementsByClassName("placeholder");
 
 // NAV
 let navLink = document.getElementsByClassName("nav-link");
@@ -21,18 +22,18 @@ let headerLastReport = document.getElementById("lr-header");
 let reportsList = document.querySelector(".reports-list");
 
 // HTML
-fetch('updated-file')
+fetch('last-file')
     .then(response => {
         if (response.ok) {
             return response.json();
         } else {
+            loadFailure();
             throw new Error(`Error al obtener el último archivo. Código de estado: ${response.status}`);
         }
     })
     .then(data => {
-        //console.log(data);
-
-        if ("error" in data) {
+        // console.log(data);
+        if ("error" in data ) {
             console.error(data.error);
         } else {
             namelatestReport.innerText = data.fileName;
@@ -47,6 +48,7 @@ fetch('updated-file')
             fetch(data.xmlFilePath)
                 .then(response => {
                     if (!response.ok) {
+                        loadFailure();
                         throw new Error('Ha ocurrido un error cargando un archivo.');
                     }
                     return response.text();
@@ -87,7 +89,7 @@ fetch('updated-file')
                         headerLastReport.classList.add("text-bg-warning")
                         for (let i = 0; i < htmlFileAnchor.length; i++) {
                             htmlFileAnchor[i].classList.add("text-bg-warning")
-                                navLink[i].classList.add("btn-warning")
+                            navLink[i].classList.add("btn-warning")
                         }
                     } else {
                         statusLastReport.innerText = "Fallando";
@@ -106,7 +108,7 @@ fetch('updated-file')
     })
 
 // HTML
-fetch('/all-files') // Ajusta la ruta según tu configuración
+fetch('/all-files')
     .then(response => {
         if (response.ok) {
             return response.json();
@@ -115,18 +117,31 @@ fetch('/all-files') // Ajusta la ruta según tu configuración
         }
     })
     .then(data => {
-        //console.log(data);
-        data.forEach((fileInfo, index) => {
-            const listItem = document.createElement('li');
-            listItem.className = "list-group-item d-flex justify-content-between pb-0 mx-4";
-            listItem.innerHTML = `
-        <div class="ms-2 me-auto">
-            <div class="fw-bold">Reporte #${index + 1}</div>
-            <p>${fileInfo.fileDate}</p>
-        </div>
-        <a class="text-dark text-decoration-underline h-25" href="${fileInfo.filePath}" target="_blank">${fileInfo.fileName}</a>
-    `;
-        //console.log(fileInfo.filePath)
+        data.slice(0, 10).forEach((fileInfo, index) => {
+                const listItem = document.createElement('li');
+                listItem.className = "list-group-item d-flex justify-content-between pb-0 mx-4";
+                listItem.innerHTML = `
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold">Reporte #${index + 1}</div>
+                    <p>${fileInfo.fileDate}</p>
+                </div>
+                <a class="text-dark text-decoration-underline h-25" href="${fileInfo.filePath}" target="_blank">${fileInfo.fileName}</a>
+                `;
             reportsList.appendChild(listItem);
         });
     })
+
+function loadFailure() {
+    for (let i = 0; i < htmlFileAnchor.length; i++) {
+        htmlFileAnchor[i].classList.add("d-none");
+        dateLatestReport.classList.add("d-none");
+        timeLastReport.innerText = "0";
+        failuresLastReport.innerText = "0";
+        errorsLastReport.innerText = "0";
+        testsLastReport.innerText = "0";
+        loadingIcon.classList.add("spinner-border");
+    }
+    setTimeout(() => {
+        window.location.reload();
+    }, 5000)
+}
