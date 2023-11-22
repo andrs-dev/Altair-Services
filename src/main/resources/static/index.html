@@ -23,14 +23,14 @@
 <!-- Navigation-->
 <nav class="navbar navbar-light bg-light static-top">
     <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             <img src="./assets/img/logo_smart_financial.png" alt="Logo de Smart Financial" height="60px">
         </a>
         <div class="navbar-anchors d-flex gap-3 justify-content-end">
-            <a style="width: 170px; padding: 4px" href="api/TRX-BDV-NOV2023.json"
+            <a style="width: 100px; padding: 4px" href="api/TRX-BDV-NOV2023.json"
                class="nav-link text-white btn"
                title="Vinculo de Descarga" download="TRX-BDV-NOV2023.json">
-                Descargar Colección</a>
+                Descargar </a>
             <a style="width: 100px; padding: 4px" class="nav-link text-white btn"
                href="#report-history" title="Historial de Reportes">
                 Historial</a>
@@ -44,7 +44,7 @@
                 <li><a href="api/TRX-BDV-NOV2023.json"
                        class="dropdown-item"
                        title="Vinculo de Descarga" download="TRX-BDV-NOV2023.json">
-                    Descargar Colección</a></li>
+                    Descargar</a></li>
                 <li><a class="dropdown-item"
                        href="#report-history" title="Historial de Reportes">
                     Historial</a></li>
@@ -78,10 +78,10 @@
         <div class="row">
             <div id="lr-container" class="card my-5 mx-auto p-0 m-0" style="max-width: 100%;">
                 <div id="lr-header" class="card-header d-flex flex-row">
-                            <span class="lr-icon-container h-auto my-auto">
-                                <img src="" class="icon-lr text-white h-auto me-3" alt="">
-                            </span>
-                    <div class="d-flex flex-row justify-content-between w-100 h-100">
+                    <span class="lr-icon-container h-auto my-auto">
+                        <img src="" class="icon-lr text-white h-auto me-3" alt="">
+                    </span>
+                    <div class="d-flex justify-content-between w-100 h-100 lr-header-info">
                         <div>
                             <h3 class="m-0 p-0 fs-3">Último Reporte: <span id="dateLatestReport"></span></h3>
 
@@ -125,7 +125,7 @@
                             </span> representa una mala respuesta del servicio.</p>
                         </div>
                         <div class="see-lr align-self-end">
-                            <a class="htmlFileAnchor btn btn-success fw-bold" target="_blank">Ver
+                            <a class="htmlFileAnchor btn fw-bold" target="_blank">Ver
                                 Reporte</a>
                         </div>
                     </div>
@@ -142,19 +142,20 @@
             <div class="text-center text-white">
                 <h2 class="mt-4">Historial De Reportes</h2>
             </div>
-            <ul class="reports-list list-group my-4 mx-auto w-100 bg-dark"></ul>
+            <ul class="reports-list list-group my-4 mx-auto w-100 bg-dark pe-0"></ul>
             <!-- <a href="#" class="lead mb-4 text-white d-flex justify-content-end">Historial Completo</a> -->
             <div class="mb-5"></div>
         </div>
     </div>
 </section>
+
 <!-- Footer-->
-<footer class="footer">
+<footer class="footer py-2">
     <div class="container">
-        <div class="row">
-            <div class="h-50 text-center text-lg-start my-0 d-flex justify-content-between">
+        <div class="row my-2 justify-content-between pt-3">
+            <div class="footer-anchors d-flex w-auto">
                 <div>
-                    <ul class="list-inline mb-2">
+                    <ul class="list-inline mb-1">
                         <li class="list-inline-item"><a
                                 href="http://192.168.10.214/smartwiki/index.php/P%C3%A1gina_principal"
                                 target="_blank" class="text-dark text-decoration-none">Wiki
@@ -164,16 +165,16 @@
                                                         target="_blank" class="text-dark text-decoration-none">
                             Repository</a></li>
                     </ul>
-                    <p class="text-muted small mb-4 mb-lg-0">&copy; Smart Financial 2023. All Rights
+                    <p class="text-muted small copy">&copy; Smart Financial 2023. All Rights
                         Reserved.</p>
                 </div>
-                <div class="float-end text-end">
-                    <a href="/">
-                        <img src="./assets/img/tiny_logo_smart_financial.png" width="40" height="40"
-                             alt="">
-                    </a>
-                    <p class="text-muted small mt-2">Version 0.6:BETA</p>
-                </div>
+            </div>
+            <div class="h-auto d-flex flex-row-reverse text-end w-auto footer-version">
+                <a href="/">
+                    <img src="./assets/img/tiny_logo_smart_financial.png" width="40" height="40"
+                         class="float-end" alt="">
+                </a>
+                <p class="text-muted small m-0 me-2 mb-1 pt-45">Version 0.7:BETA</p>
             </div>
         </div>
     </div>

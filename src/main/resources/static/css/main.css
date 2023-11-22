@@ -27,6 +27,9 @@
     margin: auto;
 }
 
+.lr-header-info {
+    flex-direction: row !important;
+}
 
 .lr-stats {
     display: flex !important;
@@ -39,6 +42,11 @@
 
 .nav-link:hover {
     border: #000 1px solid;
+}
+
+.report-item {
+    padding-top: 0.8rem !important;
+    padding-bottom: 0.8rem !important;
 }
 
 footer > div > div > div > div > ul > li > a:hover {
@@ -76,6 +84,19 @@ footer > div > div > div > div > ul > li > a:hover {
 }
 
 @media (max-width: 495px) {
+    /* Last Report */
+    .card, .card-header {
+        border-radius: 0 !important;
+    }
+
+    .lr-header-info {
+        flex-direction: column !important;
+    }
+
+    #statusLastReport {
+        float: right;
+    }
+
     .lr-stats {
         flex-direction: column !important;
         height: 100% !important;
@@ -99,5 +120,41 @@ footer > div > div > div > div > ul > li > a:hover {
         margin-top: 20px;
         justify-self: center !important;
         width: 100%;
+    }
+
+    /* Report History */
+    .report-item {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center;
+        padding: 0 !important;
+    }
+
+    .report-item a {
+        margin-bottom: 1rem;
+    }
+
+    .report-item div {
+        width: 100%;
+        margin: 0;
+        text-align: center;
+    }
+
+    /* Footer */
+
+    .footer-anchors {
+        width: 60% !important;
+    }
+
+    .footer-version {
+        flex-direction: column !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        vertical-align: top;
+    }
+
+    .footer-version p {
+        padding-top: 0.65rem !important;
     }
 }

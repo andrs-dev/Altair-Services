@@ -72,7 +72,6 @@ fetch('last-file')
                     failuresLastReport.innerText = failuresCount.toString();
                     errorsLastReport.innerText = errorsCount.toString();
                     timeLastReport.innerText = testsuites[0].getAttribute("time").toString();
-
                     if (failuresCount <= 3 && errorsCount === 0) {
                         statusLastReport.innerText = "Funcionando";
                         iconLatestReport.setAttribute("src", "assets/icons/check-circle-fill.svg");
@@ -119,11 +118,11 @@ fetch('/all-files')
     .then(data => {
         data.slice(0, 10).forEach((fileInfo, index) => {
                 const listItem = document.createElement('li');
-                listItem.className = "list-group-item d-flex justify-content-between pb-0 mx-4";
+                listItem.className = "list-group-item d-flex justify-content-between px-3 mx-4 report-item";
                 listItem.innerHTML = `
-                <div class="ms-2 me-auto">
+                <div class="me-auto">
                     <div class="fw-bold">Reporte #${index + 1}</div>
-                    <p>${fileInfo.fileDate}</p>
+                    <p class="m-0">${fileInfo.fileDate}</p>
                 </div>
                 <a class="text-dark text-decoration-underline h-25" href="${fileInfo.filePath}" target="_blank">${fileInfo.fileName}</a>
                 `;
