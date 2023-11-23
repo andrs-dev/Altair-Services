@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3aa48f7d-a11e-4ffb-b706-88c68de96480",
+		"_postman_id": "09605a32-3168-4986-808f-9eb74adc98e2",
 		"name": "Z-JSON-CONSOLIDADO",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "28467416"
@@ -3784,11 +3784,13 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					" pm.test(\"EL STATUS RESPONDE 200\", function () {",
-					"     pm.response.to.have.status(200);",
-					" });",
+					"pm.test(\"Codigo de estado es 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
 					"",
-					""
+					"pm.test(\"Tiempo de respuesta es menor de 1500ms\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(1500);",
+					"});"
 				]
 			}
 		}
