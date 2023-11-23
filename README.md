@@ -3,6 +3,16 @@
 
 Altair Services es una aplicación web que permite verificar la salud de los servicios base a las condiciones que se especifiquen en el apartado "Tests" de tu colleción de Postman.
 
+## Tabla de Contenido
+
+- [Caracteristicas](#Características)
+- [Instalación de Herramientas](#Instalación-de-Herramientas)
+- [Instalación de Librerías](#instalación-de-librerías)
+- [Configuración Inicial](#Configuración-Inicial)
+- [Cambiar Colección](#Cambiar-Colección)
+- [Usabilidad](#Usabilidad)
+- [Soporte](#Soporte)
+
 
 ## Características
 
