@@ -181,4 +181,4 @@ __(En versiones posteriores, el historial de reportes se extenderá)__
 La página ha sido optimizada para ser cómodamente usable en teléfonos moviles y, en general, en pantallas pequeñas.
 ## Soporte
 
-Cualquier bug, inconsistencia o sugerencia, puedes reportarlo por mi correo electrónico __ahernandez@smart-financial-systems.com__.
+Este aplicativo es un experimento demostrativo y se ha dejado de trabajar.
